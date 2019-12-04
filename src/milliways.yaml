@@ -1,0 +1,36 @@
+options:
+    gpio_pin_zero: 14
+    gpio_pin_two: 14
+targets:
+  main:
+    resources:
+      RawSerialPort:
+        port: '/dev/ttyUSB0'
+    drivers:
+      ExternalPowerDriver:
+          cmd_on: uhubctl --action on --ports 2 --location 2-1.1
+          cmd_off: uhubctl --action off --ports 2 --location 2-1.1
+          cmd_cycle: uhubctl --action cycle --ports 2 --location 2-1.1
+      SerialDriver: {}
+      ShellDriver:
+        prompt: 'pi@raspberrypi:[^ ]+ '
+        login_prompt: 'raspberrypi login:'
+        username: 'pi'
+        password: 'raspberry'
+      ShellStrategy: {}
+  pitwo:
+    resources:
+      RawSerialPort:
+        port: '/dev/ttyUSB1'
+    drivers:
+      ExternalPowerDriver:
+          cmd_on: uhubctl --action on --ports 1 --location 2-1.1.4
+          cmd_off: uhubctl --action off --ports 1 --location 2-1.1.4
+          cmd_cycle: uhubctl --action cycle --ports 1 --location 2-1.1.4
+      SerialDriver: {}
+      ShellDriver:
+        prompt: 'pi@raspberrypi:[^ ]+ '
+        login_prompt: 'raspberrypi login:'
+        username: 'pi'
+        password: 'raspberry'
+      ShellStrategy: {}

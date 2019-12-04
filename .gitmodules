@@ -1,0 +1,6 @@
+[submodule "src/labgrid"]
+	path = src/labgrid
+	url = https://github.com/labgrid-project/labgrid.git
+[submodule "src/uhubctl"]
+	path = src/uhubctl
+	url = https://github.com/mvp/uhubctl.git
