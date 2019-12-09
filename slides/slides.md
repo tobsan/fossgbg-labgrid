@@ -27,11 +27,15 @@ targets:
 ```
 - The YAML files may use `jinja2` templating!
 
-# DEMO
+# DEMO TIME
 - Raspberry Pi Zero
 - Raspberry Pi 2
 - GPIO connection between the two
 - Power controlled via USB hub
+- Labgrid via PyTest
+
+# DEMO TIME
+![Demo setup](Pi_Labgrid_Setup.svg){width=95%}
 
 # Features
 - Remote access
@@ -49,11 +53,13 @@ targets:
 - No scheduling
     - You can reserve boards in a distributed environment
 - No parallelization support built-in
+- It's not a test framework!
 
 # How to use
 - Library
 - PyTest
-- CLI (limited)
+- CLI (limited, more useful in a distributed setup)
+- Power control can be problematic
 
 # How to use - Getting started
 
@@ -95,13 +101,15 @@ from labgrid.protocol import ConsoleProtocol
 env = Environment('example-env.yaml')
 t = env.get_target('example')
 
--- get_driver() automatically activates
+# get_driver() automatically activates
 cp = t.get_driver(ConsoleProtocol)
--- Write to the console
+# Write to the console
 cp.write(b'test')
 ```
 
 # How to use - Pytest
+Labgrid exports the `target` and `env` fixtures
+
 ```python
 import pytest
 
@@ -113,13 +121,11 @@ def test_dummy(target):
 
 Simply run with **`pytest --lg-env config.yaml`**
 
-# Using this for daily development
+# Using labgrid for daily development
 - Have a local configuration file
 - Run same stuff as your CI/test lab runs
     - Qualify certain tests based on tags
-
-# How to use - CLI
-TBD
+    - Run via ssh or use the distributed setup
 
 # Structure / Architecture
 ::: incremental
@@ -131,10 +137,8 @@ TBD
 
 :::
 
-# Some examples
-::: incremental
-
-- Run shell command on target
-- Run shell commands on more than one target
-
-:::
+# Nice things
+- SSH support
+- imx loader support
+- Android fastboot support
+- udev matching (for USB serial on Linux this is gold)
