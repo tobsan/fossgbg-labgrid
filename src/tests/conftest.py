@@ -1,19 +1,30 @@
 import pytest
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--keepalive", action="store_true", default=False, help="Don't power down after tests"
+    )
+
 @pytest.fixture(scope='session')
-def powertwo(env):
+def keepalive(request):
+    return request.config.getoption("--keepalive")
+
+@pytest.fixture(scope='session')
+def powertwo(env, keepalive):
     target = env.get_target("pitwo")
     strat = target.get_driver("ShellStrategy")
     strat.transition("shell")
     yield target
-    strat.transition("off")
+    if not keepalive:
+        strat.transition("off")
 
 @pytest.fixture(scope='session')
 def power(target):
     strat = target.get_driver("ShellStrategy")
     strat.transition("shell")
     yield
-    strat.transition("off")
+    if not keepalive:
+        strat.transition("off")
 
 @pytest.fixture(scope='session')
 def powerboth(power, powertwo):
@@ -31,6 +42,6 @@ def sh_two(powertwo):
     
 @pytest.fixture(scope='session')
 def gpios(env):
-    pinzero = int(env.get_option("gpio_pin_zero"))
-    pintwo = int(env.get_option("gpio_pin_two"))
+    pinzero = int(env.config.get_option("gpio_pin_zero"))
+    pintwo = int(env.config.get_option("gpio_pin_two"))
     return (pinzero, pintwo)

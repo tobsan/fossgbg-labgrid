@@ -1,6 +1,6 @@
 options:
-    gpio_pin_zero: 14
-    gpio_pin_two: 14
+    gpio_pin_zero: 20
+    gpio_pin_two: 20
 targets:
   main:
     resources:
