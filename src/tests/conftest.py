@@ -4,25 +4,34 @@ def pytest_addoption(parser):
     parser.addoption(
         "--keepalive", action="store_true", default=False, help="Don't power down after tests"
     )
+    parser.addoption(
+        "--assume-on", action="store_true", default=False, help="Assume target is powered on already"
+    )
 
 @pytest.fixture(scope='session')
 def keepalive(request):
     return request.config.getoption("--keepalive")
 
 @pytest.fixture(scope='session')
-def powertwo(env, keepalive):
+def assume_on(request):
+    return request.config.getoption("--assume-on")
+
+@pytest.fixture(scope='session')
+def powertwo(env, keepalive, assume_on):
     target = env.get_target("pitwo")
     strat = target.get_driver("ShellStrategy")
-    strat.transition("shell")
+    if not assume_on:
+        strat.transition("shell")
     yield target
     if not keepalive:
         strat.transition("off")
 
 @pytest.fixture(scope='session')
-def power(target):
+def power(target, keepalive, assume_on):
     strat = target.get_driver("ShellStrategy")
-    strat.transition("shell")
-    yield
+    if not assume_on:
+        strat.transition("shell")
+    yield target
     if not keepalive:
         strat.transition("off")
 
