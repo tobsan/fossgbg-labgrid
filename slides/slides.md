@@ -14,6 +14,8 @@ theme: Copenhagen
 - Special hardware only on the embedded board
 - Testing in actual environment helps with bugs
 
+- Interesting reads: [https://elinux.org/Automated_Testing](https://elinux.org/Automated_Testing)
+
 # Labgrid
 - Created by Pengutronix
 - Developed on GitHub
@@ -37,6 +39,7 @@ targets:
 # DEMO TIME
 - Raspberry Pi Zero
 - Raspberry Pi 2
+- Raspbian on both
 - GPIO connection between the two
 - Power controlled via USB hub
 - Labgrid via PyTest
