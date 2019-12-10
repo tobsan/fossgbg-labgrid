@@ -7,6 +7,13 @@ date: December 10th 2019
 theme: Copenhagen
 ---
 
+# Why?
+- Many people/projects/companies roll their own solution
+    - Reuse is low
+    - Specialization is high
+- Special hardware only on the embedded board
+- Testing in actual environment helps with bugs
+
 # Labgrid
 - Created by Pengutronix
 - Developed on GitHub
@@ -108,7 +115,7 @@ cp.write(b'test')
 ```
 
 # How to use - Pytest
-Labgrid exports the `target` and `env` fixtures
+Labgrid exports the `target` and `env` fixtures to pytest
 
 ```python
 import pytest
