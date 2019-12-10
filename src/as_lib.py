@@ -1,7 +1,7 @@
 
 
 from labgrid import Environment
-from labgrid.protocol import ConsoleProtocol
+from labgrid.driver import ShellDriver
 from labgrid.strategy import ShellStrategy
 
 env = Environment('milliways.yaml')
@@ -13,7 +13,9 @@ strat.transition("off")
 strat.transition("shell")
 
 # get_driver() automatically activates
-cp = t.get_driver(ConsoleProtocol)
-# Write to the console
-cp.write(b'test')
+sh = t.get_driver(ShellDriver)
+# Run command in shell and print the output
+stdout, stderr, returncode = sh.run("cat /proc/cpuinfo")
+for line in stdout:
+    print(line)
 
