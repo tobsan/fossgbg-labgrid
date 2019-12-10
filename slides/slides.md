@@ -154,5 +154,5 @@ Simply run with **`pytest --lg-env config.yaml`**
 - udev matching (for USB serial on Linux this is gold)
 
 # Final slide
-- **Thanks!**
+- Findings specific to this talk
 - Repo: [https://github.com/tobsan/fossgbg-labgrid](https://github.com/tobsan/fossgbg-labgrid)
