@@ -149,3 +149,7 @@ Simply run with **`pytest --lg-env config.yaml`**
 - imx loader support
 - Android fastboot support
 - udev matching (for USB serial on Linux this is gold)
+
+# Final slide
+- **Thanks!**
+- Repo: [https://github.com/tobsan/fossgbg-labgrid](https://github.com/tobsan/fossgbg-labgrid)
